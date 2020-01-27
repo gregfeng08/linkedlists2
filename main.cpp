@@ -19,7 +19,7 @@ int main() {
   int id;
   float calculatedAverage;
   float GPA = 0.0;
-  cout << "Welcome to student list: Linked lists part 2!" << endl;
+  cout << "Welcome to Student List: Linked lists part 2!" << endl;
   while(running) { //Loop until quit
     cout << "What would you like to do? (ADD/PRINT/DELETE/QUIT)" << endl;
     cin >> userInput;
@@ -42,10 +42,10 @@ int main() {
       cin.ignore(999, '\n');
       deleteID(deletedID);
     }
-    /*else if (strcmp(userInput, "AVERAGE") == 0) {
+    else if (strcmp(userInput, "AVERAGE") == 0) {
       calculatedAverage = average(head);
       cout << "Class GPA Average: " << calculatedAverage << endl;
-      }*/
+      }
     else if (strcmp(userInput, "PRINT") == 0) { //Prints the linked list
       print(head);
     }
@@ -69,6 +69,24 @@ int main() {
   }
   return(sum/count);
   }*/
+
+float average(Node* next) {
+  float sum;
+  float count;
+  if (next == head) {
+    sum = next->getStudent()->getGPA() + next->getNext()->getStudent()->getGPA();
+    count = 2;
+  }
+  else {
+    while (next->getNext() != NULL) {
+      sum = sum + next->getStudent()->getGPA();
+      count++;
+      next = next->getNext();
+    }
+  }
+  return(sum/count);
+  
+}
 
 void add(char* name, int id, float gpa) { //Adds a new node at the end with inputable parameters
   Student* student = new Student(name,gpa,id);
